@@ -1,0 +1,36 @@
+Steps for Audio Splitting:
+Goals: Get mp3 files in GCP, convert to FLAC with sox, split with sox and store in GCP
+
+(Local) gcloud sdk install
+https://www.youtube.com/watch?v=k-8qFh8EfFA
+https://cloud.google.com/sdk/docs/install 
+
+(GCP) Create a Project
+(Local) Configure project to terminal 
+gcloud config set project PROJECT_ID
+
+(Local) converted mp3 to falc with sox (pip install sox)
+sox -G 19-309.mp3 --channels=1 --bits=16 --rate=16000 output19-309.flac
+
+(Manually) put it in gcp storage bucket
+
+(GCP) Initialize GCP Env
+https://cloud.google.com/solutions/media-entertainment/optimizing-audio-files-for-speech-to-text#initializing_your_environment 
+
+(Local) split into multiple flac files
+sox -V3 output19-309.flac  output.flac silence 1 3.0 0.1% 1 0.3 0.1% : newfile : restart
+
+(to call API Locally, but I suspect you need it to run API in GCP as well) Create Service Key
+https://cloud.google.com/speech-to-text/docs/libraries#setting_up_authentication 
+Search "APIs & Services" in Google Console 
+Go to credentials
+
+(to call API Locally, but I suspect you need it to run API in GCP as well)  Enable API for the project
+https://console.developers.google.com/apis/library/speech.googleapis.com?project=audio-splitting-10-6 
+
+(Locally) Transcribe in ipython (open python tab)
+https://cloud.google.com/speech-to-text/docs/libraries#using_the_client_library 
+** Code: https://github.com/googleapis/python-speech/blob/master/samples/snippets/quickstart.py 
+Change line 43 LINEAR16 -> FLAC
+
+(MUST MUST MUST DO!!!!!!) Shut down project (in project settings), disable API, delete service key, delete storage buckets
