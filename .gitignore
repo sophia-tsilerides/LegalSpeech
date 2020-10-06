@@ -1,5 +1,9 @@
 #ignore all . files and . folders
 .*
+*.mp3
+*.flac
+*.xlsx
+
 
 # Don't ignore .gitignore (this file)
 !/.gitignore
