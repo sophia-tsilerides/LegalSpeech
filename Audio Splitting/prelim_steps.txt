@@ -1,25 +1,55 @@
 Steps for Audio Splitting:
-Goals: Get mp3 files in GCP, convert to FLAC with sox, split with sox and store in GCP
+Goals: Get mp3 files in GCP, convert to FLAC with ffpeg, split with sox and store in GCP bucket
+TODO: Bash script converting and splitting for multiple mp3 files
 
-(Local) gcloud sdk install
+* = not a necessary step
+
+* (Local) gcloud sdk install
 https://www.youtube.com/watch?v=k-8qFh8EfFA
 https://cloud.google.com/sdk/docs/install 
 
-(GCP) Create a Project
-(Local) Configure project to terminal 
+(GCP) Create a project, Create a bucket in the project
+
+* (Local) Configure project to terminal 
 gcloud config set project PROJECT_ID
 
-(Local) converted mp3 to falc with sox (pip install sox)
-sox -G 19-309.mp3 --channels=1 --bits=16 --rate=16000 output19-309.flac
+(Local) Run oyez_parser.ipynb. Store transcript JSON in the GCP bucket and run the data transfer commands outputted by the notebook in the GCP console
 
-(Manually) put it in gcp storage bucket
+(GCP) Data Pre-Processing Steps (load mp3 to GCP, convert to FLAC format, split on silences):
+1. Copy mp3 files from Amazon S3 buckets to GCP bucket
+curl -L https://s3.amazonaws.com/oyez.case-media.mp3/case_data/2019/18-877/18-877_20191105-argument.delivery.mp3 | gsutil cp - gs://BUCKET_NAME/file_name.mp3
+2. Install current versions of ffmpeg
+sudo apt update
+sudo apt install ffmpeg
+3. Verify ffmpeg is installed
+ffmpeg -version
+4. Create “local” directory
+mkdir data
+5. Copy data files from bucket and place in “local” directory to work with (ie. convert, split, etc)
+gsutil -m cp gs://BUCKET_NAME/*.mp3 ~/data/
+6. Create enviro variable for Cloud Shell instance dir path that points to downloaded files:
+export DATA=~/data
+7. Change directory to the “data” folder
+cd data 
+8. Probe file for metadata (just to check file type; not a necessary step)
+ffprobe $DATA/file_name.mp3
+9. Convert from mp3 to flac (channel 1 mono, 16 bits, sampling rate 16000Hz)
+ffmpeg -i $DATA/file_name.mp3 -ac 1 -ar 16000 -sample_fmt s16 
+$DATA/output_file_name.flac
+10. Copy “local” files back to GCP
+gsutil cp *.flac gs://BUCKET_NAME
+11. Install sox for splitting
+sudo apt install sox
+12. Split FLAC files on silences
+sox -V3 file_to_be_split.flac output_file_name.flac silence 1 3.0 0.1% 1 0.3 0.1% : newfile : restart
+13. Copy “local” files back to GCP (created a separate folder for them)
+gsutil cp output*.flac gs://BUCKET_NAME/folder_name
+14. Delete “local” files
+ rm -r data 
 
-(GCP) Initialize GCP Env
-https://cloud.google.com/solutions/media-entertainment/optimizing-audio-files-for-speech-to-text#initializing_your_environment 
 
-(Local) split into multiple flac files
-sox -V3 output19-309.flac  output.flac silence 1 3.0 0.1% 1 0.3 0.1% : newfile : restart
 
+______ steps for using Speech to Text API locally (everything above is done in the GCP)
 (to call API Locally, but I suspect you need it to run API in GCP as well) Create Service Key
 https://cloud.google.com/speech-to-text/docs/libraries#setting_up_authentication 
 Search "APIs & Services" in Google Console 
