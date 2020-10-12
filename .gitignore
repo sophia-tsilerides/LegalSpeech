@@ -3,6 +3,7 @@
 *.mp3
 *.flac
 *.xlsx
+transcripts.json
 
 
 # Don't ignore .gitignore (this file)
