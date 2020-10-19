@@ -27,9 +27,9 @@ train:
     num_workers: 8 #number of workers for dataloader
     lr: 0.01 
     epochs: 950 #Max training speaker epoch 
-    log_interval: 15 #Epochs before printing progress
+    log_interval: 5 #Epochs before printing progress
     log_file: './speech_id_checkpoint/Stats'
-    checkpoint_interval: 30 #Save model after x speaker epochs
+    checkpoint_interval: 15 #Save model after x speaker epochs
     checkpoint_dir: './speech_id_checkpoint'
     restore: !!bool "false" #Resume training from previous model path
 ---
