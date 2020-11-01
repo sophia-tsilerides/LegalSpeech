@@ -19,14 +19,21 @@ def getMeta(docket, data):
     del times_new[-1][-1]
     
     # Flatten speaker_roles list
-    speaker_roles = [item for sublist in speaker_roles for item in sublist]
+#     speaker_roles = [item for sublist in speaker_roles for item in sublist]
+    speaker_roles2 = []
+    for i in speaker_roles:
+        if not i:
+            speaker_roles2.append('Other')
+        else:
+            speaker_roles2.append(i[0])
+         
     
     # Remove all non-word characters in speakers' names
     speakers =[re.sub(r"[^\w\s]", '', s) for s in speakers]
     # Replace all runs of whitespace with underscorei in speakers' names
     speakers =[re.sub(r"\s+", '_', s) for s in speakers]
     
-    return transcript, speakers, speaker_roles, times_new
+    return transcript, speakers, speaker_roles2, times_new
 
 def getSpeakerDict(transcript, speakers, speaker_roles, times_new):
     speaker_dict = {}
