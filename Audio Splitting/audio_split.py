@@ -80,21 +80,18 @@ def main_script(file_path = '/small_oyez_metadata.json'):
     
     with open(os.getcwd() + file_path) as f:
         data = json.load(f)
-    
+
     for docket in data:
-        try:
-            #get meta data
-            transcript, speakers, speaker_roles, times_new = getMeta(docket,data)
+        #get meta data
+        transcript, speakers, speaker_roles, times_new = getMeta(docket,data)
 
-            #create speaker dict
-            speaker_dict = getSpeakerDict(transcript, speakers, speaker_roles, times_new)
+        #create speaker dict
+        speaker_dict = getSpeakerDict(transcript, speakers, speaker_roles, times_new)
 
-            #create folder for docket and then sub folders (speaker + speaker_role) for each speaker in docket 
-            createFolders(docket, speakers, speaker_roles, times_new, data)
+        #create folder for docket and then sub folders (speaker + speaker_role) for each speaker in docket 
+        createFolders(docket, speakers, speaker_roles, times_new, data)
 
-            #split and move to correct folder 
-            getSplittingAndWriteCommands(docket, speaker_dict)
-        except:
-            pass
+        #split and move to correct folder 
+        getSplittingAndWriteCommands(docket, speaker_dict)
 
 main_script()
