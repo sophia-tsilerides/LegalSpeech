@@ -14,7 +14,7 @@ Steps to create new dataset to be included in training for speech embedder (in a
 9.  Continue training model: load saved model and continue training with all datasets
 
 
-**Modifications to .py files when running on Prince:
+Modifications to .py files when running on Prince:
 
 1.  Remove exist_ok in data_preprocess.py
 2.  Remove FullLoader() in hparam.py
