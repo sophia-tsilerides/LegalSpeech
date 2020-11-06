@@ -74,7 +74,7 @@ for file in files:
 
             #save start time, end time, transcript as .txt file in speaker folder
             with open(path+data[i][2]+'/'+file.strip('.mrt')+'_{}.txt'.format(file_num),'w') as output:
-                output.write(str(text[i]))
+                output.write(str(text[i][0])+' '+ str(text[i][1]) +' ' + text[i][2])
 
             #open corresponding audio file
             audio_file = './icsi_data/raw_audio/'+file.strip('.mrt')+'.interaction.wav'

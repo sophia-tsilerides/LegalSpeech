@@ -18,15 +18,20 @@ def getMeta(docket, data):
     # Last element of list is a 0 - cleanup    
     del times_new[-1][-1]
     
-    # Flatten speaker_roles list
-    speaker_roles = [item for sublist in speaker_roles for item in sublist]
-    
+    # Flatten speaker_roles list and replace nulls with "Other"
+    speaker_roles_clean = []
+    for i in speaker_roles:
+        if not i:
+            speaker_roles_clean.append('Other')
+        else:
+            speaker_roles_clean.append(i[0])
+            
     # Remove all non-word characters in speakers' names
     speakers =[re.sub(r"[^\w\s]", '', s) for s in speakers]
     # Replace all runs of whitespace with underscorei in speakers' names
     speakers =[re.sub(r"\s+", '_', s) for s in speakers]
     
-    return transcript, speakers, speaker_roles, times_new
+    return transcript, speakers, speaker_roles_clean, times_new
 
 def getSpeakerDict(transcript, speakers, speaker_roles, times_new):
     speaker_dict = {}
@@ -75,21 +80,18 @@ def main_script(file_path = '/small_oyez_metadata.json'):
     
     with open(os.getcwd() + file_path) as f:
         data = json.load(f)
-    
+
     for docket in data:
-        try:
-            #get meta data
-            transcript, speakers, speaker_roles, times_new = getMeta(docket,data)
+        #get meta data
+        transcript, speakers, speaker_roles, times_new = getMeta(docket,data)
 
-            #create speaker dict
-            speaker_dict = getSpeakerDict(transcript, speakers, speaker_roles, times_new)
+        #create speaker dict
+        speaker_dict = getSpeakerDict(transcript, speakers, speaker_roles, times_new)
 
-            #create folder for docket and then sub folders (speaker + speaker_role) for each speaker in docket 
-            createFolders(docket, speakers, speaker_roles, times_new, data)
+        #create folder for docket and then sub folders (speaker + speaker_role) for each speaker in docket 
+        createFolders(docket, speakers, speaker_roles, times_new, data)
 
-            #split and move to correct folder 
-            getSplittingAndWriteCommands(docket, speaker_dict)
-        except:
-            pass
+        #split and move to correct folder 
+        getSplittingAndWriteCommands(docket, speaker_dict)
 
 main_script()
