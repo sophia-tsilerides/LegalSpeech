@@ -13,7 +13,7 @@ Steps to create new dataset to be included in training for speech embedder (in a
 8.  Remove these speaker names (folders) from the unprocessed data location, and remove corresponding numpy speaker files from processed data location.
 9.  **Place all processed train_tisv and test_tisv (TIMIT and new datasets) in same folder
 10.  Update config file to point to location of unprocessed and processed data
-11.  Continue training model: load saved model and continue training with all datasets (set config to restore and train)
+11.  Continue training model: load saved model and continue training with all datasets (set config.yaml to restore and train)
 
 
 Modifications to .py files when running on Prince:
