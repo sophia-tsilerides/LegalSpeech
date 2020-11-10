@@ -10,6 +10,10 @@ Steps to create new dataset to be included in training for speech embedder (in a
 5.  Run data_preprocess.py to create train_tisv and test_tisv folders; train/test automatically split 90/10 as per TIMIT 
 6.  Check numpy speaker files for 0 length arrays. 
 7.  If there are 0 length arrays present, find out which speaker name (folder) it belongs to by running check_file.py.
+    i.  For ICSI Corpus:
+        a. speaker10.npy (speaker folder: fe905) - TRAIN
+        b. speaker35.npy (speaker folder: me908) - TRAIN
+        c. speaker0.npy  (speaker folder: me907) - TEST
 8.  Remove these speaker names (folders) from the unprocessed data location, and remove corresponding numpy speaker files from processed data location.
 9.  **Place all processed train_tisv and test_tisv (TIMIT and new datasets) in same folder
 10.  Update config file to point to location of unprocessed and processed data
