@@ -5,7 +5,8 @@ from pydub import AudioSegment
 """This script points to the location of the ICSI Meeting transcripts and raw audio files. For each single line of speech in a transcript, the script 
 extracts a list of start/end times of speaking, speaker name, and speech transcript. Folders are created for each speaker. Within each folder, a .txt file 
 is saved for a single line of speech belonging to the speaker. The .txt file contains start/end speaking time, concatenated with speech transcript. 
-Corresponding audio files of the speech segment are saved as .wav files in the speaker folder, with the same name as the corresponding .txt file."""
+The script splits the audio file based on the saved start/end times of speech segment. This corresponding audio file is saved as .wav in the speaker folder, 
+with the same name as the corresponding .txt file."""
 
 path = "./icsi_data/raw_transcripts/transcripts"
 
