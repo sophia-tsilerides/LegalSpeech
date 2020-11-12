@@ -24,3 +24,10 @@ Modifications to .py files when running on Prince:
 
 1.  Remove exist_ok in data_preprocess.py
 
+
+Modules needed for running scripts on Prince:
+
+conda install -c auto pydub
+conda install -c conda-forge pyyaml
+module swap anaconda3  python/intel/2.7.12
+module load librosa/intel/0.5.0
