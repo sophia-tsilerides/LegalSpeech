@@ -56,30 +56,32 @@ def getAudio(transcripts):
             audio_list.append(media_dict['href'])
     return [num_files,audio_list]
 
+#gets transcript along with metadata
 def getTranscript(transcripts):
     transcript_list = []
     speaker_list = []
     speaker_type_list = []
     time_list = []
     
+    #parse through many levels of json file
     for t in transcripts:
         sections = t['transcript']['sections']
         for section in sections:
             turns = section['turns']
-#             turn_num = 0
+
             for turn in turns:
-#                 turn_num += 1
-#                 print(turn_num)
                 
+                #collect speaker
                 try:
                     speaker = turn['speaker']['name']
                 except:
                     speaker = '<UNK>'
                 speaker_list.append(speaker)   
                 
+                #collect speaker type
                 try:
                     roles = turn['speaker']['roles']
-    #                 print(roles)
+
                     if isinstance(turn['speaker']['roles'], list):
                         roles = turn['speaker']['roles']
                         multiple_roles = []
@@ -93,6 +95,7 @@ def getTranscript(transcripts):
                     speaker_type_list.append(['Other'])
                 
                 
+                #collect text and time
                 texts = turn['text_blocks']
                 texts_out = []
                 times_out = []
@@ -115,11 +118,11 @@ def main():
     
     # Period of interest
         #test
-    case_summaries_2020 = case_summaries[(case_summaries['term']=='2020')]
-    #case_summaries_2020 = case_summaries[(case_summaries['term']>'2017') & (case_summaries['term']<'2021')]
+    case_summaries_filtered = case_summaries[(case_summaries['term']=='2020')]
+    #case_summaries_filtered = case_summaries[(case_summaries['term']>'2017') & (case_summaries['term']<'2021')]
     data = {}
 
-    for term, docket_number in case_summaries_2020.itertuples(index=False):
+    for term, docket_number in case_summaries_filtered.itertuples(index=False):
         docket_data, transcripts = get_case(term, docket_number)
         data[docket_number] = transcripts
         
