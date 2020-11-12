@@ -1,5 +1,54 @@
 # CDS-Capstone-2020
 
+Credit: https://github.com/HarryVolek/PyTorch_Speaker_Verification for initial speech embedder steps and network creation
+
+# Folder: SCOTUS
+
+### Details
+Prepping SCOTUS data for modeling. 
+
 Credit: https://github.com/walkerdb/supreme_court_transcripts for oyez parsing functions in mp3-to-gcp/oyez_parser.ipynb
 
-Credit: https://github.com/HarryVolek/PyTorch_Speaker_Verification for initial speech embedder steps and network creation
+### Prerequisites 
+You will need the case_summaries.json from https://github.com/walkerdb/supreme_court_transcripts/tree/master/oyez.
+
+Most of our computing is done on an HCP that does not support the requests package and therefore some of the scripts have been split to run locally and transfer of necessary files are done manually. 
+
+All the modules in HPC needed for this process are:
+module purge \n
+module load ffmpeg/intel/3.2.2 \n
+module load python3/intel/3.7.3 \n
+module load rclone/1.38 \n
+
+### Instructions
+1. Extracting mp3 files and metadata from oyez API with **python mp3_curl_commands.py**
+- NOTE: Our HPC cluster does not support the requests package, so this step happens locally. 
+- NOTE: This script extract cases for which there is only *one* mp3 file for the corresponding case. 
+- Have case_summaries from walkerdb's github in the same directory as the mp3_curl_commands.py script
+- Specify date range for cases you want in mp3_curl_commands.py (line 116)
+- Run with **python mp3_curl_commands.py**
+- Output is: shell script mp3_curl_cmds.sh that you can run in HPC to get case mp3 from oyez API && oyez_metadatajson which we need in step 5. 
+
+2. Run **mp3_curl_cmds.sh** in HPC 
+- NOTE: You might want to create an mp3s file to run the script in first. 
+- Run with **sbatch mp3_curl_cmds.sh**
+
+3. Convert mp3s to wav files with **mp3_to_wav_batch.sh**
+- NOTE: This was performed in HPC 
+- Install current versions of ffmpeg with *module load ffmpeg/intel/3.2.2* 
+- Run with **sbatch mp3_to_wav_batch.sh /path/to/files /path/to/dest** EXAMPLE: sbatch mp3_to_wav_batch.sh /scratch/smt570/test/mp3s /scratch/smt570/test/wavs
+
+5. Audio Splitting with **audio_split.py**
+- NOTE: This is run to convert the wav files into consumable format for our model
+- Load the right modules in HPC with: \n
+module purge \n
+module load ffmpeg/intel/3.2.2 \n
+module load python3/intel/3.7.3 \n
+- NOTE: Make sure you have in the directory with the script (1) the wav files you want to split (2) oyez_metadata.json file from step 1 (3) an empty SCOTUS file and 
+- Run with **python audio_split.py**
+
+
+
+
+
+
