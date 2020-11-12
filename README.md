@@ -54,6 +54,7 @@ module load rclone/1.38
 
 - NOTE: Make sure you have in the directory with the script (1) the wav files you want to split (2) oyez_metadata.json file from step 1 (3) an empty SCOTUS file and 
 - Run with `python audio_split.py`
+- Also outputs sharing_commands.txt. 
 
 
 
