@@ -8,10 +8,11 @@ is saved for a single line of speech belonging to the speaker. The .txt file con
 The script splits the audio file based on the saved start/end times of speech segment. This corresponding audio file is saved as .wav in the speaker folder, 
 with the same name as the corresponding .txt file."""
 
+#location of transcripts
 path = "./icsi_data/raw_transcripts/transcripts"
-
 transcripts = os.listdir(path)
 
+#create list of all transcript files to process
 files = []
 for file in transcripts:
     if '.mrt' in file:
@@ -19,12 +20,13 @@ for file in transcripts:
             continue
         files.append(file)
 
+#make dir to store speaker folders
 os.makedirs('./icsi_data/icsi_files')
 
+#process each transcript file
 for file in files:
-    path = "./icsi_data/raw_transcripts/transcripts"
     f = open(path+'/'+file, "r")
-    #create list of lines that contain start/end times with speaker
+    #create list of start/end times and speaker name
     data = []
     for line in f:
         if "StartTime" in line:
@@ -37,7 +39,7 @@ for file in files:
         t[0]=float(t[0])
         t[1]=float(t[1])
         
-    #get transcripts out by getting data between segment tags
+    #extract transcript text by getting data between segment tags
     segment = []
     with open(path+'/'+file) as f:
         for line in f:
@@ -47,7 +49,7 @@ for file in files:
                         break
                     segment.append(line.rstrip())
                     
-    #strip out text from transcript segments removing anything inside tags
+    #strip out text from transcript segments removing anything inside tags (descriptions of other sounds)
     transcript = []
     for s in segment:
         if (re.findall(r'(.*?)\<.*?\>', s))==[]:
@@ -93,6 +95,7 @@ for file in files:
             
             #save audio file in speaker folder with same file number
             split.export(path+data[i][2]+'/'+file.strip('.mrt')+'_{}.wav'.format(file_num),format='wav')
-            
+    
+    #done processing a single transcript
     print('Done ' + file)
 
