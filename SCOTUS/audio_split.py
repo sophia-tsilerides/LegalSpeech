@@ -5,6 +5,9 @@ import json
 import re
 import os
 
+#update users with netid of those you'd like to have read and execute access
+users = ['igw212', 'anr431']
+
 def getMeta(docket, data):
     
     #get meta data as well as rearrange to desirable formal
@@ -42,7 +45,7 @@ def getSpeakerDict(transcript, speakers, speaker_roles, times_new):
         
     return speaker_dict
 
-def createFolders(docket, speakers, speaker_roles, times, data):
+def createFolders(docket, speakers, speaker_roles, times, data, commands = False):
     os.mkdir(os.getcwd() + '/SCOTUS/' + str(docket) + '_SCOTUS')
     
     folders = []
@@ -50,8 +53,11 @@ def createFolders(docket, speakers, speaker_roles, times, data):
         folders.append(speakers[i] + '_' + speaker_roles[i])
     folders = list(dict.fromkeys(folders))
     
-    for f in folders:
-        os.mkdir(os.getcwd() + '/SCOTUS/' + str(docket) + '_SCOTUS/'+f)
+    if commands is False:
+        for f in folders:
+            os.mkdir(os.getcwd() + '/SCOTUS/' + str(docket) + '_SCOTUS/'+f)
+    else:
+        return folders
         
 def getSplittingAndWriteCommands(docket, speaker_dict):
     for k,v in speaker_dict.items():
@@ -76,7 +82,29 @@ def getSplittingAndWriteCommands(docket, speaker_dict):
         with open(os.getcwd() + '/SCOTUS/'+docket+'_SCOTUS/'+folder+'/'+k+'.txt', "w") as outfile:
             outfile.write(start + ' ' + stop + ' ' + speaker_text)
         
-def main_script(file_path = '/oyez_metadata.json'):
+def getSharingCommands(users, data):
+    if not users:
+        print('No users were selected to share SCOTUS folders with, commands not made')
+    else:
+        with open(os.getcwd() +'/SCOTUS/sharing_commands.txt', 'w') as sc:
+            for user in users:
+                for docket in data:
+                    sc.write('setfacl -m u:{}:r-x '.format(user)+ os.getcwd() + '/SCOTUS/{}_SCOTUS\n'.format(docket))
+                    
+                    #get meta data
+                    transcript, speakers, speaker_roles, times = getMeta(docket,data)
+
+                    #create speaker dict
+                    speaker_dict = getSpeakerDict(transcript, speakers, speaker_roles, times)
+
+                    #create folder for docket and then sub folders (speaker + speaker_role) for each speaker in docket 
+                    folders = createFolders(docket, speakers, speaker_roles, times, data, commands = True)
+                    
+                    for folder in folders:
+                        sc.write('setfacl -m u:{}:r-x '.format(user)+ os.getcwd() + '/SCOTUS/{}_SCOTUS/{}/\n'.format(docket, folder))
+        print('sharing_commands.txt can be found in SCOTUS, copy and paste all sharing commands in terminal')
+
+def main_script(file_path = '/oyez_metadata.json', users):
     
     with open(os.getcwd() + file_path) as f:
         data = json.load(f)
@@ -93,5 +121,8 @@ def main_script(file_path = '/oyez_metadata.json'):
 
         #split and move to correct folder 
         getSplittingAndWriteCommands(docket, speaker_dict)
+
+    getSharingCommands(users,data)
+
 
 main_script()
