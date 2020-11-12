@@ -5,9 +5,6 @@ import json
 import re
 import os
 
-#update users with netid of those you'd like to have read and execute access
-users = ['igw212', 'anr431']
-
 def getMeta(docket, data):
     
     #get meta data as well as rearrange to desirable formal
@@ -125,5 +122,5 @@ def main_script(users, file_path = '/oyez_metadata.json'):
 
     getSharingCommands(users,data)
 
-
+#update users with netid of those you'd like to have read and execute access
 main_script(users = ['igw212', 'anr431'])
