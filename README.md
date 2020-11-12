@@ -2,7 +2,7 @@
 
 Credit: https://github.com/HarryVolek/PyTorch_Speaker_Verification for initial speech embedder steps and network creation
 
-# Folder: SCOTUS
+## Folder: SCOTUS
 
 ### Details
 Prepping SCOTUS data for modeling. 
@@ -15,10 +15,13 @@ You will need the case_summaries.json from https://github.com/walkerdb/supreme_c
 Most of our computing is done on an HCP that does not support the requests package and therefore some of the scripts have been split to run locally and transfer of necessary files are done manually. 
 
 All the modules in HPC needed for this process are:
-module purge \n
-module load ffmpeg/intel/3.2.2 \n
-module load python3/intel/3.7.3 \n
-module load rclone/1.38 \n
+module purge 
+
+module load ffmpeg/intel/3.2.2 
+
+module load python3/intel/3.7.3 
+
+module load rclone/1.38 
 
 ### Instructions
 1. Extracting mp3 files and metadata from oyez API with **python mp3_curl_commands.py**
@@ -40,10 +43,14 @@ module load rclone/1.38 \n
 
 5. Audio Splitting with **audio_split.py**
 - NOTE: This is run to convert the wav files into consumable format for our model
-- Load the right modules in HPC with: \n
-module purge \n
-module load ffmpeg/intel/3.2.2 \n
-module load python3/intel/3.7.3 \n
+- Load the right modules in HPC with: 
+
+module purge 
+
+module load ffmpeg/intel/3.2.2 
+
+module load python3/intel/3.7.3 
+
 - NOTE: Make sure you have in the directory with the script (1) the wav files you want to split (2) oyez_metadata.json file from step 1 (3) an empty SCOTUS file and 
 - Run with **python audio_split.py**
 
