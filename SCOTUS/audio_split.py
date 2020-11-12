@@ -46,7 +46,8 @@ def getSpeakerDict(transcript, speakers, speaker_roles, times_new):
     return speaker_dict
 
 def createFolders(docket, speakers, speaker_roles, times, data, commands = False):
-    os.mkdir(os.getcwd() + '/SCOTUS/' + str(docket) + '_SCOTUS')
+    if commands is False:
+        os.mkdir(os.getcwd() + '/SCOTUS/' + str(docket) + '_SCOTUS')
     
     folders = []
     for i in range(len(speakers)):
@@ -104,7 +105,7 @@ def getSharingCommands(users, data):
                         sc.write('setfacl -m u:{}:r-x '.format(user)+ os.getcwd() + '/SCOTUS/{}_SCOTUS/{}/\n'.format(docket, folder))
         print('sharing_commands.txt can be found in SCOTUS, copy and paste all sharing commands in terminal')
 
-def main_script(file_path = '/oyez_metadata.json', users):
+def main_script(users, file_path = '/oyez_metadata.json'):
     
     with open(os.getcwd() + file_path) as f:
         data = json.load(f)
@@ -125,4 +126,4 @@ def main_script(file_path = '/oyez_metadata.json', users):
     getSharingCommands(users,data)
 
 
-main_script()
+main_script(users = ['igw212', 'anr431'])
