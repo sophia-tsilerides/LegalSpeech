@@ -67,17 +67,17 @@ Most of our computing is done on an HCP that does not support the requests packa
 
 All the modules in HPC needed for this process are:
 
-module purge 
+`module purge`
 
-module load python3/intel/3.7.3 
+`module load python3/intel/3.7.3` 
 
-conda install -c auto pydub
+`conda install -c auto pydub`
 
-conda install -c conda-forge pyyaml
+`conda install -c conda-forge pyyaml`
 
-module swap anaconda3  python/intel/2.7.12
+`module swap anaconda3  python/intel/2.7.12`
 
-module load librosa/intel/0.5.0
+`module load librosa/intel/0.5.0`
 
 ### Instructions
 
