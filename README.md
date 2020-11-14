@@ -59,7 +59,7 @@ module load rclone/1.38
 ## Folder: icsi_corpus
 
 ### Details
-Preparing ICSI Meeting Corpus for modeling.
+Preparing ICSI Meeting Corpus for speech embedder training/testing.
 
 ICSI Meeting Corpus License: http://groups.inf.ed.ac.uk/ami/icsi/license.shtml
 
