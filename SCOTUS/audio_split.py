@@ -99,7 +99,7 @@ def getSharingCommands(users, data):
                     folders = createFolders(docket, speakers, speaker_roles, times, data, commands = True)
                     
                     for folder in folders:
-                        sc.write('setfacl -m u:{}:r-x '.format(user)+ os.getcwd() + '/SCOTUS/{}_SCOTUS/{}/\n'.format(docket, folder))
+                        sc.write('setfacl -Rm u:{}:rwx '.format(user)+ os.getcwd() + '/SCOTUS/{}_SCOTUS/{}/\n'.format(docket, folder))
         print('sharing_commands.txt can be found in SCOTUS, copy and paste all sharing commands in terminal')
 
 def main_script(users, file_path = '/oyez_metadata.json'):
