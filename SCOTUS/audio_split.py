@@ -87,7 +87,7 @@ def getSharingCommands(users, data):
         with open(os.getcwd() +'/SCOTUS/sharing_commands.txt', 'w') as sc:
             for user in users:
                 for docket in data:
-                    sc.write('setfacl -m u:{}:r-x '.format(user)+ os.getcwd() + '/SCOTUS/{}_SCOTUS\n'.format(docket))
+                    sc.write('setfacl -Rm u:{}:rwx '.format(user)+ os.getcwd() + '/SCOTUS/{}_SCOTUS\n'.format(docket))
                     
                     #get meta data
                     transcript, speakers, speaker_roles, times = getMeta(docket,data)
