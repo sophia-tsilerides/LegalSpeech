@@ -6,17 +6,13 @@ import yaml
 
 def load_hparam(filename):
     stream = open(filename, 'r')
-    ''' note: 
-    on my pc I need to add 
-    Loader=yaml.FullLoader to yaml.load_all(stream)
-    On Colab it only works without it  
-    '''
     docs = yaml.load_all(stream)
     hparam_dict = dict()
     for doc in docs:
         for k, v in doc.items():
             hparam_dict[k] = v
     return hparam_dict
+
 
 def merge_dict(user, default):
     if isinstance(user, dict) and isinstance(default, dict):
@@ -63,3 +59,5 @@ class Hparam(Dotdict):
 
         
 hparam = Hparam()
+
+hparam_SCOTUS = Hparam(file='config/config_SCOTUS.yaml')
