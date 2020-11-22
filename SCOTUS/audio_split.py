@@ -124,4 +124,4 @@ def main_script(users, file_path = '/oyez_metadata.json'):
     getSharingCommands(users,data)
 
 #update users with netid of those you'd like to have read and execute access
-main_script(users = ['igw212', 'anr431'])
+main_script(users = ['igw212', 'anr431', 'jt2565'])
