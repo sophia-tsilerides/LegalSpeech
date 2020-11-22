@@ -103,7 +103,7 @@ def getSharingCommands(users, data):
                         sc.write('setfacl -Rm u:{}:rwx '.format(user)+ os.getcwd() + '/SCOTUS/{}_SCOTUS/{}/\n'.format(docket, folder))
         print('sharing_commands.txt can be found in SCOTUS, copy and paste all sharing commands in terminal')
 
-def main_script(users, file_path = '/oyez_metadata.json'):
+def main_script(users, file_path = '/small_oyez_metadata.json'):
     
     with open(os.getcwd() + file_path) as f:
         data = json.load(f)
