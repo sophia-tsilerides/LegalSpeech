@@ -65,20 +65,21 @@ def getSplittingAndWriteCommands(docket, speaker_dict):
         file_path_out = os.getcwd() + '/SCOTUS/'+docket+'_SCOTUS/'+folder+'/'+k+'.wav'
 
         # Split wav and put in the right folder
-        command = 'ffmpeg -ss '+ str(v[0])+' -t '+ str(str(v[1] - v[0]))+' -i '+ docket+'.wav ' + file_path_out
-        os.system(command)
-        
-        # Create .txt 
-        text = v
-        start = str(v[0])
-        stop = str(v[1])
-        # Turn the list of speaker's speech into a string and put it back in the tuple
-        speaker_text = v[2]
-        speaker_text = ' '.join(speaker_text)
+        if v[1] - v[0] > 0:
+            command = 'ffmpeg -ss '+ str(v[0])+' -t '+ str(str(v[1] - v[0]))+' -i '+ docket+'.wav ' + file_path_out
+            os.system(command)
 
-        # Write .txt
-        with open(os.getcwd() + '/SCOTUS/'+docket+'_SCOTUS/'+folder+'/'+k+'.txt', "w") as outfile:
-            outfile.write(start + ' ' + stop + ' ' + speaker_text)
+            # Create .txt 
+            text = v
+            start = str(v[0])
+            stop = str(v[1])
+            # Turn the list of speaker's speech into a string and put it back in the tuple
+            speaker_text = v[2]
+            speaker_text = ' '.join(speaker_text)
+
+            # Write .txt
+            with open(os.getcwd() + '/SCOTUS/'+docket+'_SCOTUS/'+folder+'/'+k+'.txt', "w") as outfile:
+                outfile.write(start + ' ' + stop + ' ' + speaker_text)
         
 def getSharingCommands(users, data):
     if not users:
