@@ -11,6 +11,7 @@ You will need the case_summaries.json from https://github.com/walkerdb/supreme_c
 Most of our computing is done on an HCP that does not support the requests package and therefore some of the scripts have been split to run locally and transfer of necessary files are done manually. 
 
 All the modules in HPC needed for this process are:
+
 module purge 
 
 module load ffmpeg/intel/3.2.2 
@@ -34,7 +35,7 @@ module load rclone/1.38
 
 3. Convert mp3s to wav files with **mp3_to_wav_batch.sh**
 - NOTE: This was performed in HPC 
-- NOTE: You might want to create a wavs file to run the script in first. You can `mv audio_split.py wavs`, `mv mp3_to_wav_batch.sh wavs`, and `mv oyez_metadata.json wavs`.
+- NOTE: You might want to create a wavs folder to run the script in first. You can `mv audio_split.py wavs`, `mv mp3_to_wav_batch.sh wavs`, and `mv oyez_metadata.json wavs`.
 - Install current versions of ffmpeg with `module load ffmpeg/intel/3.2.2`
 - Run with `sbatch mp3_to_wav_batch.sh /path/to/files /path/to/dest` EXAMPLE: `sbatch mp3_to_wav_batch.sh /scratch/smt570/test/mp3s /scratch/smt570/test/wavs`
 
