@@ -130,9 +130,10 @@ def main():
     audio_data = {}
 
     for docket, transcript in data.items():
-        if getAudio(data[docket])[0] == 1:
-            s3_link = getAudio(data[docket])[1][0]
-            audio_data[docket] = s3_link
+        if bool(data[docket]) and type(data[docket][0]['transcript']) == dict:
+            if getAudio(data[docket])[0] == 1:
+                s3_link = getAudio(data[docket])[1][0]
+                audio_data[docket] = s3_link
 
     # Create .shell script for HPC terminal
     file1 = open("mp3_curl_cmds.sh","w") 
