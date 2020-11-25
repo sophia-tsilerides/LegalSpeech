@@ -52,3 +52,20 @@ module load rclone/1.38
 - NOTE: Make sure you have in the directory with the script (1) the wav files you want to split (2) oyez_metadata.json file from step 1 (3) an empty SCOTUS file and 
 - Run with `python audio_split.py`
 - Also outputs sharing_commands.txt. 
+
+For large numbers of wav files, probably want to sbatch this:
+```
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=5:00:00
+#SBATCH --mem=2GB
+#SBATCH --job-name=SCOTUSsplit
+#SBATCH --output=slurm_%j.out
+  
+module purge
+module load ffmpeg/intel/3.2.2
+module load python3/intel/3.7.3
+python audio_split.py
+```
