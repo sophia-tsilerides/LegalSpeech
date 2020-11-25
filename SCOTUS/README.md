@@ -57,12 +57,12 @@ For large numbers of wav files, probably want to sbatch this:
 ```
 #!/bin/bash
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=5:00:00
-#SBATCH --mem=2GB
-#SBATCH --job-name=SCOTUSsplit
-#SBATCH --output=slurm_%j.out
+#SBATCH --time=4:00:00
+#SBATCH --gres=gpu:1
+#SBATCH --mem=8GB
+#SBATCH --job-name=split_SCOTUS
+#SBATCH --output=split_SCOTUS.out
   
 module purge
 module load ffmpeg/intel/3.2.2
