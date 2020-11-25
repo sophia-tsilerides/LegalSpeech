@@ -110,7 +110,7 @@ def main_script(users, file_path = '/small_oyez_metadata.json'):
 
     for docket in data:
         # Only create folder for audio files that don't already have a dir
-        if os.path.exists(os.getcwd() + '/' + str(docket) + '_SCOTUS') == False:
+        if os.path.exists('/scratch/smt570/SCOTUS_full/wavs/SCOTUS/' + str(docket) + '_SCOTUS') == False:
             
             # Get meta data
             transcript, speakers, speaker_roles, times_new = getMeta(docket,data)
