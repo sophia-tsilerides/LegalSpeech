@@ -109,14 +109,15 @@ def main_script(users, file_path = '/small_oyez_metadata.json'):
         data = json.load(f)
 
     for docket in data:
-        # Get meta data
-        transcript, speakers, speaker_roles, times_new = getMeta(docket,data)
-
-        # Create speaker dict
-        speaker_dict = getSpeakerDict(transcript, speakers, speaker_roles, times_new)
-        
         # Only create folder for audio files that don't already have a dir
         if os.path.exists(os.getcwd() + '/' + str(docket) + '_SCOTUS') == False:
+            
+            # Get meta data
+            transcript, speakers, speaker_roles, times_new = getMeta(docket,data)
+
+            # Create speaker dict
+            speaker_dict = getSpeakerDict(transcript, speakers, speaker_roles, times_new)
+        
             # Create folder for docket and then sub folders (speaker + speaker_role) for each speaker in docket 
             createFolders(docket, speakers, speaker_roles, times_new, data)
 
