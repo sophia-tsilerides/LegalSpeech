@@ -109,19 +109,21 @@ def main_script(users, file_path = '/small_oyez_metadata.json'):
         data = json.load(f)
 
     for docket in data:
-        #get meta data
+        # Get meta data
         transcript, speakers, speaker_roles, times_new = getMeta(docket,data)
 
-        #create speaker dict
+        # Create speaker dict
         speaker_dict = getSpeakerDict(transcript, speakers, speaker_roles, times_new)
+        
+        # Only create folder for audio files that don't already have a dir
+        if os.path.exists(os.getcwd() + '/' + str(docket) + '_SCOTUS') == False:
+            # Create folder for docket and then sub folders (speaker + speaker_role) for each speaker in docket 
+            createFolders(docket, speakers, speaker_roles, times_new, data)
 
-        #create folder for docket and then sub folders (speaker + speaker_role) for each speaker in docket 
-        createFolders(docket, speakers, speaker_roles, times_new, data)
-
-        #split and move to correct folder 
-        getSplittingAndWriteCommands(docket, speaker_dict)
+            # Split and move to correct folder 
+            getSplittingAndWriteCommands(docket, speaker_dict)
 
     getSharingCommands(users,data)
 
-#update users with netid of those you'd like to have read and execute access
+# Update users with netid of those you'd like to have read and execute access
 main_script(users = ['igw212', 'anr431', 'jt2565'])
