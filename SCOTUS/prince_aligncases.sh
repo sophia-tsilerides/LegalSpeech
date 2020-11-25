@@ -7,4 +7,4 @@
 #SBATCH --job-name=align_SCOTUS
 #SBATCH --output=align.out
 
-python align_dvector.py
+python ~/SCOTUS_Speaker_Verification/align_dvector.py

@@ -8,4 +8,4 @@
 #SBATCH --job-name=dvec_SCOTUS
 #SBATCH --output=dvec.out
 
-python dvector_SCOTUS.py
+python ~/SCOTUS_Speaker_Verification/dvector_SCOTUS.py
