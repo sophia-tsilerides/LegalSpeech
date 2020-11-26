@@ -5,6 +5,6 @@
 #SBATCH --time=1:00:00
 #SBATCH --mem=8GB
 #SBATCH --job-name=align_SCOTUS
-#SBATCH --output=align.out
+#SBATCH --output=align_scotus.out
 
-python SpeakerVerificationEmbedding/src/SCOTUS/align_SCOTUS.py
+python SpeakerVerificationEmbedding/SCOTUS/align_SCOTUS.py
