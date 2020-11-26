@@ -8,4 +8,4 @@
 #SBATCH --job-name=uis_samp
 #SBATCH --output=uisrnn_samp.out
 
-python LegalUISRNN/SCOTUS/SCOTUS.py
+python LegalUISRNN/SCOTUS/unittest_SCOTUS.py
