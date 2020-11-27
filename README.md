@@ -10,8 +10,6 @@ We find it painstakingly obvious that our society contains an extremely inconsis
 
 ### Folder & File Descriptions
 
-`SCOTUS`: Saving SCOTUS case audio from oyez API, converting and splitting the audio to format appropriate for diarization. 
-
 `speech-to-text`: Producing text from audio files using Google's Speech-to-Text API
 
 `Web Scraping ca9`: Using Selenium and BeautifulSoup packages to scrape ca9 website for case information. 
