@@ -1,4 +1,4 @@
-# Bias Judge Rulings
+# LegalSpeech
 ## DS-GA 1006 - New York University 
 - Jeffrey Tumminia (jt2565)
 - Amanda Kuznecov (anr431)
