@@ -5,9 +5,13 @@ Search for “Speech-to-Text” in the search bar
 2. Install Google Cloud SDK (if you haven’t already)
 https://www.youtube.com/watch?v=k-8qFh8EfFA
 3. Configure your machine to gcloud
-gcloud components update				should run this regularly
-gcloud auth login					to log into the system
-gcloud config set project ak8096-biasjudge-d38a     Configure local setup
+
+`gcloud components update`				should run this regularly
+
+`gcloud auth login`					to log into the system
+
+`gcloud config set project ak8096-biasjudge-d38a`     Configure local setup
+
 4. Create a service account key 
 In console, go to APIs&Services > Credentials 
 In Service Accounts section Click on the Service Account link 
