@@ -30,5 +30,5 @@ Have in the file you are cd’d into the .flac file you want to transcribe and t
 7. Disable API & delete service key
 
 8. Commands if needed:
-- ffmpeg -i input.wav -codec:a libmp3lame -qscale:a 2 output.mp3	.wav to .mp3
-- ffmpeg -i output.mp3 -ac 1 -ar 16000 sample.flac			.mp3 to .flac
+- ffmpeg -i input.wav -codec:a libmp3lame -qscale:a 2 output.mp3	(.wav to .mp3)
+- ffmpeg -i output.mp3 -ac 1 -ar 16000 sample.flac			(.mp3 to .flac)
