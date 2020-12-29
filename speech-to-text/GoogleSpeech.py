@@ -28,6 +28,7 @@ Adjustments by Sophia
 import argparse
 import io
 import os
+import json 
 
 # TODO: Enable data logging for price discount; (Data logging is disabled for this project for Google Cloud Speech API) 
 #       Speech Adaptation: https://cloud.google.com/speech-to-text/docs/context-strength, https://cloud.google.com/speech-to-text/docs/speech-adaptation
@@ -135,12 +136,17 @@ def transcribe_gcs(gcs_uri, num_speakers):
     print("Waiting for operation to complete...")
     response = operation.result(timeout=300)
 
-    # Writing results to txt
-    case_file = open("{}.txt".format(gcs_uri.split('/')[-1][:-5]), "a")
+    # Writing results to json
+
+    result_counter = 0 
+    word_counter = 0 
+    output_json = {}
+
     for result in response.results:
         alternative = result.alternatives[0]
-        case_file.write("Transcript: {} \n".format(alternative.transcript))
-        case_file.write("Confidence: {} \n".format(alternative.confidence))
+        output_json[f"Transcript_{result_counter}"] =  alternative.transcript
+        output_json[f"Confidence_{result_counter}"] =  alternative.confidence
+        result_counter += 1
 
         for word_info in alternative.words:
             word = word_info.word
@@ -148,10 +154,16 @@ def transcribe_gcs(gcs_uri, num_speakers):
             end_time = word_info.end_time
             speaker_tag = word_info.speaker_tag
 
-            case_file.write(
-                f"Word: {word}, start_time: {start_time.total_seconds()}, end_time: {end_time.total_seconds()}, speaker_tag: {speaker_tag} \n"
-            )
-    case_file.close()
+            output_json[f"Word_{word_counter}"] =  word
+            output_json[f"start_time_{word_counter}"] =  start_time.total_seconds()
+            output_json[f"end_time_{word_counter}"] =  end_time.total_seconds()
+            output_json[f"speaker_tag_{word_counter}"] =  speaker_tag
+
+            word_counter += 1
+
+    with open("{}.json".format(gcs_uri.split('/')[-1][:-5]) , "w+") as file:
+        json.dump(output_json, file)
+    
 
     print("Dirized and transcribed {}".format(gcs_uri.split('/')[-1]))
 
