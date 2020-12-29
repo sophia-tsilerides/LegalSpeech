@@ -27,7 +27,7 @@ public repos!!)
 6. Transcribe
 
 Have in the file you are cd’d into the .flac file you want to transcribe and the GoogleSpeech.py file from github
-`python GoogleSpeech.py sample.flac`
+`python GoogleSpeech.py sample.flac num_speakers`
 
 7. Disable API & delete service key & Delete bucket
 
@@ -37,7 +37,7 @@ Same instructions as above but instead of referencing a local file, you must ref
 1. Create a bucket to store flac files
 2. Give service account proper permissions 
 - `gsutil iam ch serviceAccount:my-service-account@project.iam.gserviceaccount.com:objectAdmin gs://my-project/my-bucket`
-3. Run with `python GoogleSpeech.py gs://cloud-samples-tests/speech/vr.flac`
+3. Run with `python GoogleSpeech.py gs://cloud-samples-tests/speech/vr.flac num_speakers`
 4. Disable API & delete service key & Delete bucket
 
 ### Conversion commands
