@@ -40,7 +40,7 @@ Same instructions as above but instead of referencing a local file, you must ref
 - Choose Edit bucket permissions.
 - Click the + Add members button.
 - In the New members field, enter one or more identities that need access to your bucket.
-- Select role: storage.objectViewer
+- Select role: Storage Object Admin
 - Save 
 
 (Steps from: https://cloud.google.com/storage/docs/access-control/using-iam-permissions)
