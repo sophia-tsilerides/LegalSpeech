@@ -35,16 +35,8 @@ Have in the file you are cd’d into the .flac file you want to transcribe and t
 Same instructions as above but instead of referencing a local file, you must reference a file in a GCP bucket. So:
 
 1. Create a bucket to store flac files
-2. Give proper permissions 
-- Click the Bucket overflow menu.
-- Choose Edit bucket permissions.
-- Click the + Add members button.
-- In the New members field, enter one or more identities that need access to your bucket.
-- Select role: Storage Object Admin
-- Save 
-
-(Steps from: https://cloud.google.com/storage/docs/access-control/using-iam-permissions)
-
+2. Give service account proper permissions 
+- `gsutil iam ch serviceAccount:my-service-account@project.iam.gserviceaccount.com:objectAdmin gs://my-project/my-bucket`
 3. Run with `python GoogleSpeech.py gs://cloud-samples-tests/speech/vr.flac`
 4. Disable API & delete service key & Delete bucket
 
