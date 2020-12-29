@@ -144,8 +144,8 @@ def transcribe_gcs(gcs_uri, num_speakers):
 
     for result in response.results:
         alternative = result.alternatives[0]
-        output_json[f"Transcript_{result_counter}"] =  alternative.transcript
-        output_json[f"Confidence_{result_counter}"] =  alternative.confidence
+        output_json[f"{result_counter}_Transcript"] =  alternative.transcript
+        output_json[f"{result_counter}_Confidence"] =  alternative.confidence
         result_counter += 1
 
         for word_info in alternative.words:
@@ -154,10 +154,10 @@ def transcribe_gcs(gcs_uri, num_speakers):
             end_time = word_info.end_time
             speaker_tag = word_info.speaker_tag
 
-            output_json[f"Word_{word_counter}"] =  word
-            output_json[f"start_time_{word_counter}"] =  start_time.total_seconds()
-            output_json[f"end_time_{word_counter}"] =  end_time.total_seconds()
-            output_json[f"speaker_tag_{word_counter}"] =  speaker_tag
+            output_json[f"{word_counter}_Word"] =  word
+            output_json[f"{word_counter}_start_time"] =  start_time.total_seconds()
+            output_json[f"{word_counter}_end_time"] =  end_time.total_seconds()
+            output_json[f"{word_counter}_speaker_tag"] =  speaker_tag
 
             word_counter += 1
 
