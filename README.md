@@ -13,3 +13,5 @@ We find it painstakingly obvious that our society contains an extremely inconsis
 `speech-to-text`: Producing text from audio files using Google's Speech-to-Text API
 
 `Web Scraping ca9`: Using Selenium and BeautifulSoup packages to scrape ca9 website for case information. 
+
+`SCOTUS`: Working with U.S. Supreme Court audio files from oyez API for consumption to UIS-RNN model.
