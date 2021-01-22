@@ -33,3 +33,7 @@ The diarization process requires:
 
 4) Times associated with each embedding from the full case audio.
 
+## Evaluation
+
+Note that all non-judge speakers should be labeled as “Non-Judge” in the RTTM file being compared, for the purpose of evaluating diarization performance. Visualization and evaluation of the diarization performance uses the pyannote package. 
+
