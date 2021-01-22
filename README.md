@@ -17,3 +17,5 @@ Please reference our [paper](https://www.dropbox.com/s/k5jmrq1s700z4k3/LegalDiar
 `Web Scraping ca9`: Using Selenium and BeautifulSoup packages to scrape ca9 website for case information. 
 
 `SCOTUS`: Working with U.S. Supreme Court audio files from oyez API for consumption to UIS-RNN model.
+
+`Diarization`: Diarizing full court proceeding using the Reference Dependent Speaker Verification (RDSV) method.
