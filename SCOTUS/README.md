@@ -17,11 +17,11 @@ All the modules in HPC needed for this process are:
 
 module purge 
 
-module load ffmpeg/intel/3.2.2 
+module load ffmpeg/4.2.4 
 
-module load python3/intel/3.7.3 
+module load python/intel/3.8.6
 
-module load rclone/1.38 
+module load rclone/1.53.3 
 
 ### Instructions
 1. Extracting mp3 files and metadata from oyez API with **mp3_curl_commands.py**
