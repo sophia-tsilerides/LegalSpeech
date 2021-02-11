@@ -57,7 +57,7 @@ def main_script():
 
                 for i in range(len(case_info)):
                     start = case_info.iloc[i][0][0]
-                    stop = case_info.iloc[i][0][1]
+                    stop = case_info.iloc[i][0][-1]
                     speaker = case_info.iloc[i][1] + '_' + case_info.iloc[i][2]
                     speaker_text = " ".join(case_info.iloc[i][3])
 
