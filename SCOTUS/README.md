@@ -38,7 +38,7 @@ module load rclone/1.53.3
 
 3. Convert mp3s to wav files with **mp3_to_wav_batch.sh**
 - NOTE: This was performed in HPC 
-- NOTE: You might want to create a wavs folder to run the script in first. You can `mv audio_split.py wavs`, `mv mp3_to_wav_batch.sh wavs`, and `mv oyez_metadata.json wavs`.
+- NOTE: You might want to create a wavs folder to run the script in first. You can `mv audio_split.py wavs`, `mv mp3_to_wav_batch.sh wavs`, `mv make_transcripts.py wavs` and `mv oyez_metadata.json wavs`.
 - Install current versions of ffmpeg with `module load ffmpeg/intel/3.2.2`
 - Run with `sbatch mp3_to_wav_batch.sh /path/to/files /path/to/dest` EXAMPLE: `sbatch mp3_to_wav_batch.sh /scratch/smt570/test/mp3s /scratch/smt570/test/wavs`
 
@@ -56,7 +56,7 @@ module load rclone/1.53.3
 - Run with `python audio_split.py`
 
 5. Transcribing WITHOUT splitting with **make_transcripts.py**
-Alternatively, you can create transcripts for your wav files without splitting them by speaker by running `python make_transcripts.py`. Make sure this file is sitting in the same folder with all the wav files (`mv make_transcripts.py wavs` if necessary.) 
+Alternatively, you can create transcripts for your wav files without splitting them by speaker by running `python make_transcripts.py`. Make sure this file is sitting in the same folder with all the wav files (`mv make_transcripts.py wavs` if you haven't already.) 
 
 
 ## d-vector embedding
