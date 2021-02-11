@@ -56,6 +56,7 @@ module load rclone/1.53.3
 - Run with `python audio_split.py`
 
 5. Transcribing WITHOUT splitting with **make_transcripts.py**
+- NOTE: This was performed in HPC 
 Alternatively, you can create transcripts for your wav files without splitting them by speaker by running `python make_transcripts.py`. Make sure this file is sitting in the same folder with all the wav files (`mv make_transcripts.py wavs` if you haven't already.) 
 
 
