@@ -9,7 +9,7 @@
 # Credit: https://linuxconfig.org/how-to-use-ffmpeg-to-convert-multiple-media-files-at-once-on-linux
   
 module purge
-module load ffmpeg/intel/3.2.2 
+module load ffmpeg/4.2.4
 
 srcExt=mp3
 destExt=wav
