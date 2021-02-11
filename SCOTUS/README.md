@@ -26,7 +26,7 @@ module load rclone/1.38
 ### Instructions
 1. Extracting mp3 files and metadata from oyez API with **mp3_curl_commands.py**
 - NOTE: Our HPC cluster does not support the requests package, so this step happens locally. 
-- NOTE: This script extract cases for which there is only *one* mp3 file for the corresponding case. 
+- NOTE: This script extracts cases for which there is only *one* mp3 file for the corresponding case. 
 - Have case_summaries from walkerdb's github in the same directory as the mp3_curl_commands.py script
 - Specify date range for cases you want in mp3_curl_commands.py (line 116)
 - Run with `python mp3_curl_commands.py`
@@ -42,7 +42,7 @@ module load rclone/1.38
 - Install current versions of ffmpeg with `module load ffmpeg/intel/3.2.2`
 - Run with `sbatch mp3_to_wav_batch.sh /path/to/files /path/to/dest` EXAMPLE: `sbatch mp3_to_wav_batch.sh /scratch/smt570/test/mp3s /scratch/smt570/test/wavs`
 
-5. Audio Splitting with **audio_split.py**
+4. Audio Splitting with **audio_split.py**
 - NOTE: This is run to convert the wav files into consumable format for our model
 - Load the right modules in HPC with: 
 
@@ -54,6 +54,10 @@ module load rclone/1.38
 
 - NOTE: Make sure you have in the directory with the script (1) the wav files you want to split (2) oyez_metadata.json file from step 1 (3) an empty SCOTUS file and 
 - Run with `python audio_split.py`
+
+5. Transcribing WITHOUT splitting with **make_transcripts.py**
+Alternatively, you can create transcripts for your wav files without splitting them by speaker by running `python make_transcripts.py`. Make sure this file is sitting in the same folder with all the wav files (`mv make_transcripts.py wavs` if necessary.) 
+
 
 ## d-vector embedding
 
