@@ -8,7 +8,7 @@
 ### Overview
 We find it painstakingly obvious that our society contains an extremely inconsistent legal system. Historically, this has been simply accepted as an artifact of human nature (perhaps correctly). We believe that data science finally offers us a means to identify weaknesses in the system and improve its ability to perform consistently and fairly. It can open avenues to quantitative analysis of bias in judge rulings that can allow for clearer communication of the issues to public officials and the greater public. Dr. Kaufman's work has a theme of searching for casual relations in noisy political data, an area under-studied in our opinion. Our hope is that we may contribute to the cause of improving a system that affects the lives of so many individuals in our country. 
 
-Please reference our [paper](https://www.dropbox.com/s/k5jmrq1s700z4k3/LegalDiarization.pdf?dl=0) and [video](https://www.dropbox.com/s/2lsnf504v0ihya0/Team32_video.mp4?dl=0) for more information. 
+Please reference our [paper](https://arxiv.org/abs/2104.01304) and [video](https://www.dropbox.com/s/2lsnf504v0ihya0/Team32_video.mp4?dl=0) for more information. 
 
 ### Folder & File Descriptions
 
